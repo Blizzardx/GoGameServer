@@ -6,7 +6,7 @@ import (
 	"github.com/davyxu/golog"
 	"github.com/mitchellh/mapstructure"
 	"io/ioutil"
-	"litgame.cn/Server/Core/Common"
+	"github.com/Blizzardx/GoGameServer/Core/Common"
 	"net/http"
 	"reflect"
 	"time"

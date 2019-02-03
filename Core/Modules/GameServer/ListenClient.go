@@ -2,8 +2,8 @@ package GameServer
 
 import (
 	"github.com/davyxu/cellnet"
-	"litgame.cn/Server/Core/InternalMessage"
-	"litgame.cn/Server/Core/Network"
+	"github.com/Blizzardx/GoGameServer/Core/InternalMessage"
+	"github.com/Blizzardx/GoGameServer/Core/Network"
 	"reflect"
 	"runtime/debug"
 )

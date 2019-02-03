@@ -1,6 +1,6 @@
 package GameServer
 
-import "litgame.cn/Server/Core/Modules/Config"
+import "github.com/Blizzardx/GoGameServer/Core/Modules/Config"
 
 func (server *GameServer) initConfig(remoteConfigUrl string) {
 

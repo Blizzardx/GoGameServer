@@ -3,7 +3,7 @@ package MongoDB
 import (
 	"github.com/davyxu/golog"
 	"gopkg.in/mgo.v2"
-	"litgame.cn/Server/Core/Common"
+	"github.com/Blizzardx/GoGameServer/Core/Common"
 )
 
 type MongoDBConnector struct {

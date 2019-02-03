@@ -4,7 +4,7 @@ package InternalMessage
 
 import (
 	"github.com/davyxu/cellnet"
-	_ "litgame.cn/Server/Core/Modules/codec/msgpack"
+	_ "github.com/Blizzardx/GoGameServer/Core/Modules/codec/msgpack"
 
 	"fmt"
 	"github.com/davyxu/cellnet/codec"

@@ -133,7 +133,7 @@ package {{.PackageName}}
 {{if gt (.Structs|len) 0}}
 import (
 	"github.com/davyxu/cellnet"
-	_ "litgame.cn/Server/Core/Modules/codec/msgpack"
+	_ "github.com/Blizzardx/GoGameServer/Core/Modules/codec/msgpack"
 	"reflect"
 	"fmt"
 	"github.com/davyxu/cellnet/codec"

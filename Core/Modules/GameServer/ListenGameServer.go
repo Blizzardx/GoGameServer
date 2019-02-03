@@ -2,7 +2,7 @@ package GameServer
 
 import (
 	"github.com/davyxu/cellnet"
-	"litgame.cn/Server/Core/Network"
+	"github.com/Blizzardx/GoGameServer/Core/Network"
 )
 
 func (server *GameServer) listenGameServer() {

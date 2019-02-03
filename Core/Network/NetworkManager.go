@@ -11,7 +11,7 @@ import (
 	_ "github.com/davyxu/cellnet/proc/tcp"
 	"github.com/davyxu/cellnet/timer"
 	"github.com/davyxu/golog"
-	"litgame.cn/Server/Core/Common"
+	"github.com/Blizzardx/GoGameServer/Core/Common"
 	"os"
 	"os/signal"
 	"runtime/debug"

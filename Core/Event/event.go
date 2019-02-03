@@ -4,7 +4,7 @@ import (
 	"container/list"
 	"errors"
 	"github.com/davyxu/golog"
-	"litgame.cn/Server/Core/Common"
+	"github.com/Blizzardx/GoGameServer/Core/Common"
 )
 
 var (

@@ -3,7 +3,7 @@ package Config
 import (
 	"encoding/json"
 	"io/ioutil"
-	"litgame.cn/Server/Core/Network"
+	"github.com/Blizzardx/GoGameServer/Core/Network"
 	"os"
 	"runtime"
 )

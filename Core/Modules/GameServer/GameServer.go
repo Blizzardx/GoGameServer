@@ -6,10 +6,10 @@ import (
 	"github.com/davyxu/cellnet/rpc"
 	"github.com/davyxu/cellnet/timer"
 	"github.com/davyxu/golog"
-	"litgame.cn/Server/Core/Common"
-	"litgame.cn/Server/Core/InternalMessage"
-	"litgame.cn/Server/Core/Modules/Config"
-	"litgame.cn/Server/Core/Network"
+	"github.com/Blizzardx/GoGameServer/Core/Common"
+	"github.com/Blizzardx/GoGameServer/Core/InternalMessage"
+	"github.com/Blizzardx/GoGameServer/Core/Modules/Config"
+	"github.com/Blizzardx/GoGameServer/Core/Network"
 	"time"
 )
 

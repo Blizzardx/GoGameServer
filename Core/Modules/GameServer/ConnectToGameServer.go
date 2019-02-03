@@ -2,8 +2,8 @@ package GameServer
 
 import (
 	"github.com/davyxu/cellnet"
-	"litgame.cn/Server/Core/Modules/Config"
-	"litgame.cn/Server/Core/Network"
+	"github.com/Blizzardx/GoGameServer/Core/Modules/Config"
+	"github.com/Blizzardx/GoGameServer/Core/Network"
 	"time"
 )
 
