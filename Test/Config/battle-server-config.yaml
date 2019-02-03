@@ -1,0 +1,5 @@
+#日志级别
+LogLevel : debug
+#节点配置文件远程地址
+NodeConfigAdd : https://youxi12.oss-cn-shanghai.aliyuncs.com/koudaitafang/gameweb/node-config.json
+Id : 1

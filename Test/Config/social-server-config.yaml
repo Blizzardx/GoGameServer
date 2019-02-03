@@ -1,0 +1,8 @@
+#日志级别
+LogLevel : debug
+#mongo 数据库地址
+MongoDBAdd : 127.0.0.1:27017
+#mongo 数据库 名称
+DBName : tanjidan
+#节点配置文件远程地址
+NodeConfigAdd : https://youxi12.oss-cn-shanghai.aliyuncs.com/koudaitafang/gameweb/node-config.json

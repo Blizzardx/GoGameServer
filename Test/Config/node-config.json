@@ -1,0 +1,23 @@
+{
+  "GameServerList": [{
+    "Id": 1,
+    "LogicId": 1,
+    "InternalAddress": "127.0.0.1",
+    "ExternalAddress": "192.168.159.1",
+    "ClientListenPort": "4000",
+    "GameServerListenPort": "5000",
+    "ClientProtocol":"ws"
+  }],
+  "SingletonComponentServerList": [{
+    "Id": 0,
+    "LogicId": 2,
+    "InternalAddress": "127.0.0.1",
+    "GameServerListenPort": "6000"
+  }],
+  "MultiComponentServerList": [{
+    "Id": 1,
+    "LogicId": 1,
+    "InternalAddress": "127.0.0.1",
+    "GameServerListenPort": "7001"
+  }]
+}
