@@ -5,10 +5,9 @@ package InternalMessage
 import (
 	"github.com/davyxu/cellnet"
 	_ "github.com/Blizzardx/GoGameServer/Core/Modules/codec/msgpack"
-
+	"reflect"
 	"fmt"
 	"github.com/davyxu/cellnet/codec"
-	"reflect"
 )
 
 func (self *InternalMsg) String() string           { return fmt.Sprintf("%+v", *self) }

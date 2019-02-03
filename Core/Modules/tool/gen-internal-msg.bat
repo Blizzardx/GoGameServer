@@ -1,12 +1,12 @@
 set CURR=%cd%
-cd ../../../../../../
+cd ../../../../../../../
 set GOPATH=%cd%
 cd %CURR%
 cd ../../InternalMessage
 set GoFilePath=%cd%
 cd %CURR%
 
-go build -o gen-internal-msg.exe litgame.cn/Server/Core/Modules/tool/internal-gen
+go build -o gen-internal-msg.exe github.com/Blizzardx/GoGameServer/Core/Modules/tool/internal-gen
 @IF %ERRORLEVEL% NEQ 0 pause
 
 
