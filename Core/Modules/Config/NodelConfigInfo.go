@@ -2,8 +2,8 @@ package Config
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"github.com/Blizzardx/GoGameServer/Core/Network"
+	"io/ioutil"
 	"os"
 	"runtime"
 )
@@ -15,7 +15,7 @@ type NodeConfigGameServerInfo struct {
 	ExternalAddress       string //外网ip
 	ClientListenPort      string //客户端监听端口
 	ClientListenPortProxy string //客户端监听端口代理
-	GameServerListenPort  string //game server监听端口
+	GameServerListenPort  string //game server监听端口,也用来健康汇报以及其他gm操作
 	ClientProtocol        string // "tcp" "ws" ...
 }
 type NodeConfigComponentServerInfo struct {
@@ -23,6 +23,7 @@ type NodeConfigComponentServerInfo struct {
 	LogicId              int32  //逻辑id 代表类型 （社交服务，聊天服务，战斗服务）
 	InternalAddress      string //内网ip
 	GameServerListenPort string //监听game server端口
+	GMListenPort         string //监听gm端口 主要用来健康汇报以及其他gm操作
 }
 type NodeConfigInfo struct {
 	GameServerList               []*NodeConfigGameServerInfo
