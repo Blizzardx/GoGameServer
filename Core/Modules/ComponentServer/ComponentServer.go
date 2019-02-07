@@ -1,15 +1,17 @@
 package ComponentServer
 
 import (
+	"github.com/Blizzardx/GoGameServer/Core/Common"
+	"github.com/Blizzardx/GoGameServer/Core/Event"
+	"github.com/Blizzardx/GoGameServer/Core/InternalMessage"
+	"github.com/Blizzardx/GoGameServer/Core/Modules/Config"
+	"github.com/Blizzardx/GoGameServer/Core/Modules/EventDefine"
+	"github.com/Blizzardx/GoGameServer/Core/Network"
 	"github.com/davyxu/cellnet"
 	"github.com/davyxu/cellnet/msglog"
 	"github.com/davyxu/cellnet/rpc"
 	"github.com/davyxu/cellnet/timer"
 	"github.com/davyxu/golog"
-	"github.com/Blizzardx/GoGameServer/Core/Common"
-	"github.com/Blizzardx/GoGameServer/Core/InternalMessage"
-	"github.com/Blizzardx/GoGameServer/Core/Modules/Config"
-	"github.com/Blizzardx/GoGameServer/Core/Network"
 	"reflect"
 	"time"
 )
@@ -55,6 +57,9 @@ func (server *ComponentServer) Start(remoteConfigUrl string, serverType int32, s
 
 	//注册退出函数
 	Network.RegisterExitCallback(server.onExitFunction)
+
+	//事件通知服务器启动
+	Event.KEventManager.Call(EventDefine.SystemEvent_ServerInit, nil)
 
 	Network.Start()
 }
@@ -216,4 +221,7 @@ func (server *ComponentServer) onExitFunction() {
 		server.listenGameServerSession.Stop()
 		server.listenGameServerSession = nil
 	}
+
+	//事件通知服务器退出
+	Event.KEventManager.Call(EventDefine.SystemEvent_ServerQuit, nil)
 }

@@ -1,13 +1,15 @@
 package OperationServer
 
 import (
+	"github.com/Blizzardx/GoGameServer/Core/Event"
+	"github.com/Blizzardx/GoGameServer/Core/Modules/Config"
+	"github.com/Blizzardx/GoGameServer/Core/Modules/EventDefine"
+	"github.com/Blizzardx/GoGameServer/Core/Network"
 	"github.com/davyxu/cellnet"
 	"github.com/davyxu/cellnet/msglog"
 	"github.com/davyxu/cellnet/rpc"
 	"github.com/davyxu/cellnet/timer"
 	"github.com/davyxu/golog"
-	"litgame.cn/Server/Core/Modules/Config"
-	"litgame.cn/Server/Core/Network"
 	"time"
 )
 
@@ -29,6 +31,9 @@ func (server *operationServer) Start() {
 
 	//注册退出函数
 	Network.RegisterExitCallback(server.onExitFunction)
+
+	//事件通知服务器启动
+	Event.KEventManager.Call(EventDefine.SystemEvent_ServerInit, nil)
 
 	Network.Start()
 }
@@ -135,4 +140,7 @@ func (server *operationServer) onExitFunction() {
 		session.Stop()
 	}
 	server.gameServerMap = map[int32]*Network.ServerObject{}
+
+	//事件通知服务器退出
+	Event.KEventManager.Call(EventDefine.SystemEvent_ServerQuit, nil)
 }
