@@ -80,8 +80,8 @@ func (self *eventManager) AddKEvent(eventName string, when func(ev *KEvent) bool
 func (self *eventManager) Call(name string, args interface{}) {
 	some := KEventManager.events[name]
 
-	if some == nil || name == "" {
-		log.Errorln("event name is invalid")
+	if name == "" {
+		log.Errorln("event name is invalid " + name)
 		return
 	}
 
