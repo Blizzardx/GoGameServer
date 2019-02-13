@@ -28,7 +28,7 @@ func (room *RoomContainer) init(roomLogic IRoom, roomId int32) {
 	room.maxSilenceTime = room.roomLogic.GetMaxSilenceTime()
 	room.tickRate = room.roomLogic.GetTickRate()
 	room.isRunning = true
-	room.roomLogic.OnInit()
+	room.roomLogic.OnInit(room.roomId)
 	room.createTime = time.Now()
 	Common.SafeCall(room.beginContainer)
 }
