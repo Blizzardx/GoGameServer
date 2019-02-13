@@ -12,6 +12,7 @@ type roomMsg struct {
 }
 type RoomContainer struct {
 	roomId         int32
+	createTime     time.Time
 	roomLogic      IRoom
 	maxSilenceTime time.Duration //最长静默时间 收不到消息 就算静默 超过静默时间 自动回收房间资源 删除房间
 	tickRate       time.Duration
@@ -24,10 +25,11 @@ func (room *RoomContainer) init(roomLogic IRoom, roomId int32) {
 	room.roomId = roomId
 	room.msgQueue = Common.NewSyncQueue()
 	room.roomLogic = roomLogic
-	room.maxSilenceTime = time.Duration(room.roomLogic.GetMaxSilenceTime())
-	room.tickRate = time.Duration(room.roomLogic.GetTickRate())
+	room.maxSilenceTime = room.roomLogic.GetMaxSilenceTime()
+	room.tickRate = room.roomLogic.GetTickRate()
 	room.isRunning = true
 	room.roomLogic.OnInit()
+	room.createTime = time.Now()
 	Common.SafeCall(room.beginContainer)
 }
 func (room *RoomContainer) delete() {
@@ -80,6 +82,17 @@ func (room *RoomContainer) checkRoomExpire() {
 		DeleteRoom(room.roomId)
 	}
 }
+
+//----------------------public interface-----------------------------
 func (room *RoomContainer) RefreshAliveTime() {
 	room.lastAliveTime = time.Now()
+}
+func (room *RoomContainer) GetId() int32 {
+	return room.roomId
+}
+func (room *RoomContainer) GetCreateTime() time.Time {
+	return room.createTime
+}
+func (room *RoomContainer) GetLogic() IRoom {
+	return room.roomLogic
 }
