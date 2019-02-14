@@ -37,7 +37,7 @@ func (room *RoomContainer) delete() {
 }
 
 func (room *RoomContainer) beginContainer() {
-	tick := time.NewTicker(room.tickRate * time.Millisecond)
+	tick := time.NewTicker(room.tickRate)
 	roomExpireCheckTicker := time.NewTicker(5 * time.Minute)
 	for room.isRunning {
 		select {
@@ -46,8 +46,10 @@ func (room *RoomContainer) beginContainer() {
 			room.roomLogic.OnTick()
 		case <-roomExpireCheckTicker.C:
 			room.checkRoomExpire()
+			log.Debugln("on checkRoomExpire")
 		}
 	}
+	log.Debugln("on delete")
 	room.onDelete()
 }
 func (room *RoomContainer) onDelete() {

@@ -37,6 +37,7 @@ func CreateRoom(roomLogic IRoom) *RoomContainer {
 //删除房间
 func DeleteRoom(id int32) {
 	if room, ok := roomMap[id]; ok {
+		log.Debugln("delete room ", id)
 		delete(roomMap, id)
 		recycleRoomId(id)
 		room.delete()
