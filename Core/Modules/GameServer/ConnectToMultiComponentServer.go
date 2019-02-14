@@ -1,10 +1,10 @@
 package GameServer
 
 import (
-	"github.com/davyxu/cellnet"
 	"github.com/Blizzardx/GoGameServer/Core/InternalMessage"
 	"github.com/Blizzardx/GoGameServer/Core/Modules/Config"
 	"github.com/Blizzardx/GoGameServer/Core/Network"
+	"github.com/davyxu/cellnet"
 	"time"
 )
 
@@ -72,10 +72,14 @@ func (server *GameServer) SendRPCMessageToMultiComponentServer(serverType int32,
 	if serverMap, ok := server.multiComponentServerMap[serverType]; ok {
 		if session, ok := serverMap[serverId]; ok {
 			if session.Session == nil {
+				userCallback(nil)
 				return
 			}
 			//
 			Network.RPC(session.Session, msg, timeOut, userCallback)
+		} else {
+			userCallback(nil)
+			return
 		}
 	}
 }

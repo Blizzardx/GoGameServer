@@ -30,7 +30,7 @@ func (room *RoomContainer) init(roomLogic IRoom, roomId int32) {
 	room.isRunning = true
 	room.roomLogic.OnInit(room.roomId)
 	room.createTime = time.Now()
-	Common.SafeCall(room.beginContainer)
+	go Common.SafeCall(room.beginContainer)
 }
 func (room *RoomContainer) delete() {
 	room.isRunning = false
