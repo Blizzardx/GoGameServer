@@ -11,14 +11,15 @@ type roomMsg struct {
 	playerId string
 }
 type RoomContainer struct {
-	roomId         int32
-	createTime     time.Time
-	roomLogic      IRoom
-	maxSilenceTime time.Duration //最长静默时间 收不到消息 就算静默 超过静默时间 自动回收房间资源 删除房间
-	tickRate       time.Duration
-	msgQueue       *Common.SyncQueue
-	isRunning      bool
-	lastAliveTime  time.Time
+	roomId             int32
+	createTime         time.Time
+	roomLogic          IRoom
+	maxSilenceTime     time.Duration //最长静默时间 收不到消息 就算静默 超过静默时间 自动回收房间资源 删除房间
+	tickRate           time.Duration
+	msgQueue           *Common.SyncQueue
+	isRunning          bool
+	isExitWitException bool
+	lastAliveTime      time.Time
 }
 
 func (room *RoomContainer) init(roomLogic IRoom, roomId int32) {
@@ -28,12 +29,20 @@ func (room *RoomContainer) init(roomLogic IRoom, roomId int32) {
 	room.maxSilenceTime = room.roomLogic.GetMaxSilenceTime()
 	room.tickRate = room.roomLogic.GetTickRate()
 	room.isRunning = true
+	room.isExitWitException = false
 	room.roomLogic.OnInit(room.roomId)
 	room.createTime = time.Now()
-	go Common.SafeCall(room.beginContainer)
+	go Common.SafeCallWithRecover(room.beginContainer, room.onRoomException)
 }
 func (room *RoomContainer) delete() {
 	room.isRunning = false
+}
+
+func (room *RoomContainer) onRoomException() {
+	room.isRunning = false
+	room.isExitWitException = true
+	DeleteRoom(room.roomId)
+	room.onDelete()
 }
 
 func (room *RoomContainer) beginContainer() {

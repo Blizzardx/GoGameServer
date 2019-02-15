@@ -33,7 +33,11 @@ func (stateManager *StateManager) ChangeStatus(newStatusType int32) {
 	if stateManager.currentStatus != nil && newStatus.logic.GetStatusType() == stateManager.currentStatus.logic.GetStatusType() {
 		return
 	}
-	stateManager.stateMgr.OnChangeStatus_Before(stateManager.currentStatus.logic, newStatus.logic)
+	if nil == stateManager.currentStatus {
+		stateManager.stateMgr.OnChangeStatus_Before(nil, newStatus.logic)
+	} else {
+		stateManager.stateMgr.OnChangeStatus_Before(stateManager.currentStatus.logic, newStatus.logic)
+	}
 
 	if nil != stateManager.currentStatus {
 		stateManager.currentStatus.exit()

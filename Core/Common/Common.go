@@ -20,3 +20,12 @@ func SafeCall(f func()) {
 	}()
 	f()
 }
+func SafeCallWithRecover(f func(), onException func()) {
+	defer func() {
+		if err := recover(); err != nil {
+			log.Errorln(string(debug.Stack()))
+			onException()
+		}
+	}()
+	f()
+}
