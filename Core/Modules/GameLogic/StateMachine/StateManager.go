@@ -9,6 +9,14 @@ type StateManager struct {
 //----------------public interface--------------------------
 func (stateManager *StateManager) Init(stateMgr IStateManager, allStatus []IState) {
 	for _, state := range allStatus {
+		if state == nil {
+			log.Errorln("state can't not be null")
+			continue
+		}
+		if stateManager.getStatusByType(state.GetStatusType()) != nil {
+			log.Errorln("state is already in list ", state.GetStatusType())
+			continue
+		}
 		stateManager.allStatus = append(stateManager.allStatus, createState(state))
 	}
 	stateManager.stateMgr = stateMgr
@@ -22,6 +30,9 @@ func (stateManager *StateManager) ChangeStatus(newStatusType int32) {
 		log.Errorln("cant't change status ,not found state by type ", newStatusType)
 		return
 	}
+	if stateManager.currentStatus != nil && newStatus.logic.GetStatusType() == stateManager.currentStatus.logic.GetStatusType() {
+		return
+	}
 	stateManager.stateMgr.OnChangeStatus_Before(stateManager.currentStatus.logic, newStatus.logic)
 
 	if nil != stateManager.currentStatus {
@@ -29,7 +40,7 @@ func (stateManager *StateManager) ChangeStatus(newStatusType int32) {
 	}
 	stateManager.currentStatus = newStatus
 	stateManager.currentStatus.enter()
-	stateManager.stateMgr.OnChangeStatus_Before(stateManager.currentStatus.logic, newStatus.logic)
+	stateManager.stateMgr.OnChangeStatus_After(stateManager.currentStatus.logic, newStatus.logic)
 }
 func (stateManager *StateManager) Tick() {
 	stateManager.stateMgr.OnTick_Before()
@@ -37,6 +48,9 @@ func (stateManager *StateManager) Tick() {
 		stateManager.currentStatus.tick()
 	}
 	stateManager.stateMgr.OnTick_After()
+}
+func (stateManager *StateManager) GetCurrentState() IState {
+	return stateManager.currentStatus.logic
 }
 
 //----------------system function--------------------------
